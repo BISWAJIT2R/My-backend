@@ -1,12 +1,7 @@
-import "dotenv/config"
-import express from "express";
+import "dotenv/config";
+import { app } from "./app.js";
+import IsdbConnected from "./db/ConnectDataBase.js";
 
-const app = express();
-
-
-app.use(express.json())
-
-app.listen(process.env.PORT, () => {
-    console.log(`server listen on http://localhost:${process.env.PORT}`);
-})
-
+IsdbConnected().then(() => app.listen(process.env.PORT, () => {
+  console.log(`server runing on ${process.env.PORT}`);
+})).catch((e) => console.log(e))
